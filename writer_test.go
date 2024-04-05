@@ -22,7 +22,6 @@ func TestDefaultWriter(t *testing.T) {
 func TestFileWriter(t *testing.T) {
 	writer, err := NewWriter(&WriterOptions{
 		Filename: "./testdata/access.log",
-		Combine:  true,
 	})
 	if err != nil {
 		t.Fatal(err)

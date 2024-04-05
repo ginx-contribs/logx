@@ -10,10 +10,10 @@ import (
 // WriterOptions configures the logger writer
 type WriterOptions struct {
 	// output filename
-	Filename string `mapstructure:"Filename"`
+	Filename string `mapstructure:"filename"`
 
-	// whether to combine std writer and file writer
-	Combine bool `mapstructure:"Combine"`
+	// whether to writer into os.Stderr
+	DisableStderr bool `mapstructure:"disableStderr"`
 
 	// whether to cut log
 	Cut bool `mapstructure:"cut"`
@@ -41,15 +41,15 @@ type WriterOptions struct {
 
 // NewWriter returns a new append-only file writer, supporting log cutting.
 func NewWriter(options *WriterOptions) (io.WriteCloser, error) {
-	var writerCloser io.WriteCloser
 
 	if options == nil {
 		options = &WriterOptions{}
 	}
 
-	if options.Filename == "" {
-		writerCloser = os.Stdout
-	} else {
+	var wcs []io.WriteCloser
+
+	if options.Filename != "" {
+		var writerCloser io.WriteCloser
 		// cut log
 		if options.Cut {
 			writerCloser = &lumberjack.Logger{
@@ -67,13 +67,14 @@ func NewWriter(options *WriterOptions) (io.WriteCloser, error) {
 			}
 			writerCloser = file
 		}
-
-		if options.Combine {
-			writerCloser = MultiWriteCloser(os.Stdout, writerCloser)
-		}
+		wcs = append(wcs, writerCloser)
 	}
 
-	return writerCloser, nil
+	if !options.DisableStderr {
+		wcs = append(wcs, os.Stderr)
+	}
+
+	return MultiWriteCloser(wcs...), nil
 }
 
 func openFile(name string, flag int, perm os.FileMode) (*os.File, error) {
