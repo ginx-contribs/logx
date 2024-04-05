@@ -17,7 +17,7 @@ func TestHandlerDefault(t *testing.T) {
 
 func TestHandlerOptions(t *testing.T) {
 	handler, err := NewHandler(nil, &HandlerOptions{
-		Level:       slog.LevelInfo.String(),
+		Level:       slog.LevelInfo,
 		Format:      TextFormat,
 		Source:      true,
 		TimeFormat:  time.TimeOnly,
