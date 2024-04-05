@@ -12,11 +12,16 @@ import (
 const (
 	TextFormat = "TEXT"
 	JSONFormat = "JSON"
+
+	PromptKey = tint.PromptKey
 )
 
 type HandlerOptions struct {
 	// Log level, default INFO
 	Level slog.Level `mapstructure:"level"`
+
+	// log prompt
+	Prompt string `mapstructure:"prompt"`
 
 	// TEXT or JSON
 	Format string `mapstructure:"format"`
