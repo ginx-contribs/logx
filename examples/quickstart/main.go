@@ -15,5 +15,5 @@ func main() {
 
 	slog.SetDefault(logger.Slog())
 	// 2024-04-05 12:26:13 INFO hell world!
-	slog.Info("hell world!")
+	slog.Info("hello world!")
 }
