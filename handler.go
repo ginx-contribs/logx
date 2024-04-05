@@ -2,7 +2,7 @@ package logx
 
 import (
 	"fmt"
-	"github.com/dstgo/tint"
+	"github.com/ginx-contribs/tint"
 	"io"
 	"log/slog"
 	"os"
