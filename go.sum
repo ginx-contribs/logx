@@ -1,5 +1,5 @@
-github.com/dstgo/tint v1.0.6 h1:CXsI6EF2AkXctuOVFjiMJyNluoUm2jmra0nHIfA6ECk=
-github.com/dstgo/tint v1.0.6/go.mod h1:FnhjlL5P6S3rIfGZhkXcXEt8V5pxwiDlyWOf3UmyTyk=
+github.com/ginx-contribs/tint v1.0.7 h1:3bhThg9YK0tYisLxmxtdplvkYFnfwJxFmXeF9CjkuK8=
+github.com/ginx-contribs/tint v1.0.7/go.mod h1:DUaYGxG2SvYtvpXYBWHIHspXcgLJb9JNvd+gA6mkApI=
 github.com/lmittmann/tint v1.0.4 h1:LeYihpJ9hyGvE0w+K2okPTGUdVLfng1+nDNVR4vWISc=
 github.com/lmittmann/tint v1.0.4/go.mod h1:HIS3gSy7qNwGCj+5oRjAutErFBl4BzdQP6cJZ0NfMwE=
 github.com/samber/lo v1.39.0 h1:4gTz1wUhNYLhFSKl6O+8peW0v2F4BCY034GRpU9WnuA=
