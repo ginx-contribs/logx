@@ -16,7 +16,7 @@ const (
 
 type HandlerOptions struct {
 	// Log level, default INFO
-	Level string `mapstructure:"level"`
+	Level slog.Level `mapstructure:"level"`
 
 	// TEXT or JSON
 	Format string `mapstructure:"format"`
@@ -48,15 +48,6 @@ func NewHandler(writer io.Writer, options *HandlerOptions) (slog.Handler, error)
 		options.Format = TextFormat
 	}
 
-	if options.Level == "" {
-		options.Level = slog.LevelInfo.String()
-	}
-
-	var level slog.LevelVar
-	if err := level.UnmarshalText([]byte(options.Level)); err != nil {
-		return nil, err
-	}
-
 	if options.TimeFormat == "" {
 		options.TimeFormat = time.DateTime
 	}
@@ -77,7 +68,7 @@ func NewHandler(writer io.Writer, options *HandlerOptions) (slog.Handler, error)
 	case TextFormat:
 		return tint.NewHandler(writer, &tint.Options{
 			AddSource:   options.Source,
-			Level:       level.Level(),
+			Level:       options.Level,
 			ReplaceAttr: replaceAttr,
 			TimeFormat:  options.TimeFormat,
 			NoColor:     !options.Color,
@@ -85,7 +76,7 @@ func NewHandler(writer io.Writer, options *HandlerOptions) (slog.Handler, error)
 	case JSONFormat:
 		return slog.NewJSONHandler(writer, &slog.HandlerOptions{
 			AddSource:   options.Source,
-			Level:       level.Level(),
+			Level:       options.Level,
 			ReplaceAttr: replaceAttr,
 		}), nil
 	default:
