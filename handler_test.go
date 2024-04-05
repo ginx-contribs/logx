@@ -19,6 +19,7 @@ func TestHandlerOptions(t *testing.T) {
 	handler, err := NewHandler(nil, &HandlerOptions{
 		Level:       slog.LevelInfo,
 		Format:      TextFormat,
+		Prompt:      "[logx]",
 		Source:      true,
 		TimeFormat:  time.TimeOnly,
 		ReplaceAttr: nil,
