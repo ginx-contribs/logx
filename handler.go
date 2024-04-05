@@ -74,6 +74,7 @@ func NewHandler(writer io.Writer, options *HandlerOptions) (slog.Handler, error)
 		return tint.NewHandler(writer, &tint.Options{
 			AddSource:   options.Source,
 			Level:       options.Level,
+			Prompt:      options.Prompt,
 			ReplaceAttr: replaceAttr,
 			TimeFormat:  options.TimeFormat,
 			NoColor:     !options.Color,
@@ -83,7 +84,7 @@ func NewHandler(writer io.Writer, options *HandlerOptions) (slog.Handler, error)
 			AddSource:   options.Source,
 			Level:       options.Level,
 			ReplaceAttr: replaceAttr,
-		}), nil
+		}).WithAttrs([]slog.Attr{slog.String(PromptKey, options.Prompt)}), nil
 	default:
 		return nil, fmt.Errorf("unsupported format %s", options.Format)
 	}
