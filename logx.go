@@ -2,6 +2,7 @@ package logx
 
 import (
 	"errors"
+	"log"
 	"log/slog"
 )
 
@@ -39,6 +40,11 @@ func (l *Logger) Handler() slog.Handler {
 
 func (l *Logger) Slog() *slog.Logger {
 	return l.l
+}
+
+// LogLogger return *log.Logger by handlers
+func (l *Logger) LogLogger(level slog.Level) *log.Logger {
+	return slog.NewLogLogger(l.handler, level)
 }
 
 func (l *Logger) Close() error {
